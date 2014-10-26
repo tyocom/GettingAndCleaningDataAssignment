@@ -1,0 +1,44 @@
+The final dataframes contain these fields:
+
+ACTIVITY  - the activity that is being measured.  The possible values are:
+     	WALKING
+ 	WALKING_UPSTAIRS
+	WALKING_DOWNSTAIRS
+	SITTING
+	STANDING
+	LAYING
+
+SUBJECT_ID - a code indicating the subject that is doing the activity.
+
+The remaining column names are the variables that are being measured.  They
+are the mean of the various measurements in the X, Y and Z directions.  These
+are the signals:
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+
+
+The script reads in the data from the x_train and and x_test files into two dataframes.  It gets the column names from the features.txt file and uses them to set the names of the dataframes.  It then gets the subject and activity data from the y_test, y_train, and subject_tests files.  I am assuming the rows in these files match the rows in the x_train and x_test files.  The columns containing the ids of the subjects and activities are added to the x_train and x_test dataframes.  Then these dataframes are combined using rbind.   
+
+After combining them only the columns that have mean or std in their names are preserved along with the subject and activity columns.  The labels for the activities are then merged into the dataframe using the merge function.  This dataframe, referenced in step 4, is named "df". 
+
+
+The script then creates a list of the measurement variables to use for the melt command.  The melt and dcast functions are used to get the mean of each variable per activity and subject.
+
+The dataframe with this data is saved as "dftidy".  
